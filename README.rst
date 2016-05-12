@@ -23,7 +23,9 @@ João, Erick, Bruno
 PostgreSQL
 ~~~~~~~~~~
 
-Gabriel Cunha, Eduardo, Jonathan, Kerolayne
+- Eduardo Klosowski `@eduardoklosowski <https://github.com/eduardoklosowski>`_
+
+Gabriel Cunha, Jonathan, Kerolayne
 
 
 Oracle

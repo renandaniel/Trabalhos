@@ -31,7 +31,7 @@ Guilherme Borges, Rodrigo
 
 Renan, Karlos, Felipe Walther, Gabriel Maia, Miguel
 Murilo, Andrei, Guilherme A, Jose Raul, Luis Eduardo
-Felipe Prestes, Fabiane, Jeferson
+Felipe Prestes, Fabiane, Jeferson, Jean Peter
 
 Os participantes que não vão estar nas equipes dos SGBDs citados acima vão entrar no projeto do banco de dados para o e-commerce da TrekPix
 

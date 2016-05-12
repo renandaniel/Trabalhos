@@ -27,13 +27,14 @@ Gabriel Cunha, Eduardo, Jonathan, Kerolayne
 Franciele, Lucas, Ederson, José Otávio, Johann
 Guilherme Borges, Rodrigo
 
+
+Os participantes que não vão estar nas equipes dos SGBDs citados acima vão entrar no projeto do banco de dados para o e-commerce da TrekPix. Apenas lembrando que o MinhaCaixa não tem o Diagrama e o Esquema, portanto a equipe do SQL Server deverá fazê-los.
+
 * SQL Server
 
 Renan, Karlos, Felipe Walther, Gabriel Maia, Miguel
 Murilo, Andrei, Guilherme A, Jose Raul, Luis Eduardo
 Felipe Prestes, Fabiane, Jeferson, Jean Peter
-
-Os participantes que não vão estar nas equipes dos SGBDs citados acima vão entrar no projeto do banco de dados para o e-commerce da TrekPix
 
 * RH/Pessoal
 * Financeiro/Tesouraria

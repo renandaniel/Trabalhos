@@ -28,6 +28,8 @@ Franciele, Lucas, Ederson, José Otávio, Johann
 Guilherme Borges, Rodrigo
 
 
+* Observação
+
 Os participantes que não vão estar nas equipes dos SGBDs citados acima vão entrar no projeto do banco de dados para o e-commerce da TrekPix. Apenas lembrando que o MinhaCaixa não tem o Diagrama e o Esquema, portanto a equipe do SQL Server deverá fazê-los.
 
 * SQL Server

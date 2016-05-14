@@ -1,5 +1,6 @@
-from sqlalchemy import Column, DateTime, Integer, Sequence, String
+from sqlalchemy import Column, DateTime, ForeignKey, Integer, Numeric, Sequence, String
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import relationship
 
 
 Base = declarative_base()
@@ -22,3 +23,15 @@ class Cliente(Base):
     rua = Column(String(50))
     cidade = Column(String(50))
     nascimento = Column(DateTime)
+
+
+class Agencia(Base):
+    __tablename__ = 'agencia'
+
+    codigo = Column(Integer, Sequence('agencia_codigo_seq'), primary_key=True)
+    nome = Column(String(50))
+    cidade = Column(String(50))
+    fundos = Column(Numeric(20, 2))
+    grupo_codigo = Column(Integer, ForeignKey('grupo.codigo'))
+
+    grupo = relationship('Grupo', backref='agencias')

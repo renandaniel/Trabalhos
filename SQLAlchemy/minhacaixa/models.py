@@ -48,3 +48,15 @@ class Conta(Base):
 
     agencia = relationship('Agencia', backref='contas')
     cliente = relationship('Cliente', backref='contas')
+
+
+class Emprestimo(Base):
+    __tablename__ = 'emprestimo'
+
+    agencia_codigo = Column(Integer, ForeignKey('agencia.codigo'))
+    cliente_codigo = Column(Integer, ForeignKey('cliente.codigo'))
+    codigo = Column(String(10), primary_key=True)
+    total = Column(Numeric(20, 2))
+
+    agencia = relationship('Agencia', backref='emprestimos')
+    cliente = relationship('Cliente', backref='emprestimos')

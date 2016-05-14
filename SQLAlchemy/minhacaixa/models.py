@@ -35,3 +35,16 @@ class Agencia(Base):
     grupo_codigo = Column(Integer, ForeignKey('grupo.codigo'))
 
     grupo = relationship('Grupo', backref='agencias')
+
+
+class Conta(Base):
+    __tablename__ = 'conta'
+
+    agencia_codigo = Column(Integer, ForeignKey('agencia.codigo'))
+    numero = Column(String(10), primary_key=True)
+    cliente_codigo = Column(Integer, ForeignKey('cliente.codigo'))
+    saldo = Column(Numeric(20, 2))
+    abertura = Column(DateTime)
+
+    agencia = relationship('Agencia', backref='contas')
+    cliente = relationship('Cliente', backref='contas')

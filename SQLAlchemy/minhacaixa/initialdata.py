@@ -1,7 +1,8 @@
 from datetime import datetime
+from decimal import Decimal
 
 from . import engine, Session
-from .models import Base, Grupo, Cliente
+from .models import Base, Grupo, Cliente, Agencia
 
 
 Base.metadata.create_all(engine)
@@ -64,5 +65,38 @@ db.add_all([
             rua='Nova Brasília',
             cidade='Joinville',
             nascimento=datetime(1985, 3, 18)),
+
+    Agencia(nome='Verde Vale',
+            cidade='Blumenau',
+            fundos=Decimal('900000'),
+            grupo_codigo=1),
+    Agencia(nome='Cidade das Flores',
+            cidade='Joinville',
+            fundos=Decimal('800000'),
+            grupo_codigo=1),
+    Agencia(nome='Universitária',
+            cidade='Florianópolis',
+            fundos=Decimal('750000'),
+            grupo_codigo=1),
+    Agencia(nome='Joinville',
+            cidade='Joinville',
+            fundos=Decimal('950000'),
+            grupo_codigo=1),
+    Agencia(nome='Beira Mar',
+            cidade='Florianópolis',
+            fundos=Decimal('600000'),
+            grupo_codigo=1),
+    Agencia(nome='Criciúma',
+            cidade='Criciúma',
+            fundos=Decimal('500000'),
+            grupo_codigo=1),
+    Agencia(nome='Blumenau',
+            cidade='Blumenau',
+            fundos=Decimal('1100000'),
+            grupo_codigo=1),
+    Agencia(nome='Germânia',
+            cidade='Blumenau',
+            fundos=Decimal('400000'),
+            grupo_codigo=1),
 ])
 db.commit()

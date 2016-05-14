@@ -75,3 +75,17 @@ class Depositante(Base):
     agencia = relationship('Agencia', backref='depositantes')
     conta = relationship('Conta', backref='depositantes')
     cliente = relationship('Cliente', backref='depositantes')
+
+
+class Devedor(Base):
+    __tablename__ = 'devedor'
+
+    codigo = Column(Integer, Sequence('devedor_codigo_seq'), primary_key=True)
+    agencia_codigo = Column(Integer, ForeignKey('agencia.codigo'))
+    cliente_codigo = Column(Integer, ForeignKey('cliente.codigo'))
+    emprestimo_codigo = Column(String(10), ForeignKey('emprestimo.codigo'))
+    saldo = Column(Numeric(20, 2))
+
+    agencia = relationship('Agencia', backref='devedores')
+    cliente = relationship('Cliente', backref='devedores')
+    emprestimo = relationship('Emprestimo', backref='devedores')

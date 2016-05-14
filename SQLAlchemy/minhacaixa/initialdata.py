@@ -2,7 +2,7 @@ from datetime import datetime
 from decimal import Decimal
 
 from . import engine, Session
-from .models import Base, Grupo, Cliente, Agencia, Conta, Emprestimo, Depositante
+from .models import Base, Grupo, Cliente, Agencia, Conta, Emprestimo, Depositante, Devedor
 
 
 Base.metadata.create_all(engine)
@@ -239,5 +239,34 @@ db.add_all([
                 cliente_codigo=11,
                 valor=800,
                 data=datetime(2013, 8, 3)),
+
+    Devedor(agencia_codigo=4,
+            cliente_codigo=1,
+            emprestimo_codigo='L-10',
+            saldo=1000),
+    Devedor(agencia_codigo=2,
+            cliente_codigo=4,
+            emprestimo_codigo='L-20',
+            saldo=500),
+    Devedor(agencia_codigo=4,
+            cliente_codigo=2,
+            emprestimo_codigo='L-15',
+            saldo=800),
+    Devedor(agencia_codigo=4,
+            cliente_codigo=3,
+            emprestimo_codigo='L-30',
+            saldo=2000),
+    Devedor(agencia_codigo=6,
+            cliente_codigo=8,
+            emprestimo_codigo='L-40',
+            saldo=2000),
+    Devedor(agencia_codigo=1,
+            cliente_codigo=11,
+            emprestimo_codigo='L-35',
+            saldo=2600),
+    Devedor(agencia_codigo=4,
+            cliente_codigo=7,
+            emprestimo_codigo='L-50',
+            saldo=2300),
 ])
 db.commit()

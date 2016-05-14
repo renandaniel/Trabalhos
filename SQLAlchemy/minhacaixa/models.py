@@ -89,3 +89,15 @@ class Devedor(Base):
     agencia = relationship('Agencia', backref='devedores')
     cliente = relationship('Cliente', backref='devedores')
     emprestimo = relationship('Emprestimo', backref='devedores')
+
+
+class CartaoCredito(Base):
+    __tablename__ = 'cartao_credito'
+
+    agencia_codigo = Column(Integer, ForeignKey('agencia.codigo'))
+    cliente_codigo = Column(Integer, ForeignKey('cliente.codigo'))
+    codigo = Column(String(20), primary_key=True)
+    limite = Column(Numeric(20, 2))
+
+    agencia = relationship('Agencia', backref='cartoes_credito')
+    cliente = relationship('Cliente', backref='cartoes_credito')

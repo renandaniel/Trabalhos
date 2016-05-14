@@ -60,3 +60,18 @@ class Emprestimo(Base):
 
     agencia = relationship('Agencia', backref='emprestimos')
     cliente = relationship('Cliente', backref='emprestimos')
+
+
+class Depositante(Base):
+    __tablename__ = 'depositante'
+
+    codigo = Column(Integer, Sequence('depositante_codigo_seq'), primary_key=True)
+    agencia_codigo = Column(Integer, ForeignKey('agencia.codigo'))
+    conta_numero = Column(String(10), ForeignKey('conta.numero'))
+    cliente_codigo = Column(Integer, ForeignKey('cliente.codigo'))
+    valor = Column(Numeric(20, 2))
+    data = Column(DateTime)
+
+    agencia = relationship('Agencia', backref='depositantes')
+    conta = relationship('Conta', backref='depositantes')
+    cliente = relationship('Cliente', backref='depositantes')

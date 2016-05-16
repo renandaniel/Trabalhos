@@ -1,0 +1,259 @@
+CREATE TABLE Grupo( 
+GrupoCodigo INT CONSTRAINT PK_Grupo PRIMARY KEY,
+GrupoNome VARCHAR(50),
+GrupoRazaoSocial VARCHAR(50),
+GrupoCNPJ varchar(20)
+)
+/*no Oracle ate o express 11g nao tem auto-incremento, 
+entao utilizei uam sequencia para fazer id das tabelas gerar automatico
+ usar nextval nos insert exemplo: (seq_Grupo_GrupoCodigo.nextval,'valor')*/
+create sequence seq_Grupo_GrupoCodigo nocache;
+create or replace trigger seq_Grupo_GrupoCodigo
+    before insert on Grupo
+    for each row
+    begin
+    select seq_Grupo_GrupoCodigo.nextval into :new.GrupoCodigo from dual;
+    end;
+
+
+INSERT INTO Grupo(GrupoNome 
+            ,GrupoRazaoSocial
+            ,GrupoCNPJ
+            )
+VALUES      ('MyBank'
+            ,'MyBank International SA' 
+            ,'11.222.333/0001-44'
+            );
+
+create table Clientes
+(
+ClienteCodigo int CONSTRAINT PK_CLIENTES PRIMARY KEY,
+ClienteNome varchar (50),
+ClienteRua varchar (50),
+ClienteCidade varchar (50),
+ClienteNascimento date
+)
+create sequence seq_Clientes_ClienteCodigo nocache;
+create or replace trigger seq_Clientes_ClienteCodigo
+    before insert on Clientes
+    for each row
+    begin
+    select seq_Clientes_ClienteCodigo.nextval into :new.ClienteCodigo from dual;
+    end;
+ 
+ON [PRIMARY] --Modelo de dados
+GO
+insert into Clientes (ClienteNome,ClienteRua,ClienteCidade,ClienteNascimento) values ('Ana', 'XV de Novembro','Joinville','06081980')
+GO
+insert into Clientes (ClienteNome,ClienteRua,ClienteCidade,ClienteNascimento) values  ('Laura','07 de Setembro','Blumenau','08081981')
+GO
+insert into Clientes (ClienteNome,ClienteRua,ClienteCidade,ClienteNascimento) values  ('Vânia','01 de Maio','Blumenau','06081982')
+GO
+insert into Clientes (ClienteNome,ClienteRua,ClienteCidade,ClienteNascimento) values  ('Franco','Felipe Schmidt','Florianopolis','06081985')
+GO
+insert into Clientes (ClienteNome,ClienteRua,ClienteCidade,ClienteNascimento) values  ('Eduardo', 'Beria Mar Norte', 'Florianópolis','10111970')
+GO
+insert into Clientes (ClienteNome,ClienteRua,ClienteCidade,ClienteNascimento) values  ('Bruno', '24 de maio','Criciúma','05071982')
+GO
+insert into Clientes (ClienteNome,ClienteRua,ClienteCidade,ClienteNascimento) values  ('Rodrigo','06 de agosto','Joinville','06081981')
+GO
+insert into Clientes (ClienteNome,ClienteRua,ClienteCidade,ClienteNascimento) values  ('Ricardo','João Colin','Joinville','15021980')
+GO
+insert into Clientes (ClienteNome,ClienteRua,ClienteCidade,ClienteNascimento) values  ('Alexandre','Margem esquerda','Blumenau','07031980')
+GO
+insert into Clientes (ClienteNome,ClienteRua,ClienteCidade,ClienteNascimento) values  ('Luciana','Estreito','Florianópolis','06091987')
+GO
+insert into Clientes (ClienteNome,ClienteRua,ClienteCidade,ClienteNascimento) values  ('Juliana','Iririu','Joinville','06011970')
+GO
+insert into Clientes (ClienteNome,ClienteRua,ClienteCidade,ClienteNascimento) values  ('Pedro','Aventureiro','Joinville','08061975')
+GO
+insert into Clientes (ClienteNome,ClienteRua,ClienteCidade,ClienteNascimento) values  ('Julia','Nova Brasília','Joinville','19031985')
+GO
+
+CREATE TABLE Agencias
+(
+AgenciaCodigo INT CONSTRAINT PK_Agencias PRIMARY KEY,
+AgenciaNome VARCHAR (50),
+AgenciaCidade varchar (50),
+AgenciaFundos MONEY,--pesquisar sobre MONEY
+GrupoCodigo int
+)
+create sequence seq_Agenciass_AgenciaCodigo nocache;
+create or replace trigger seq_Agenciass_AgenciaCodigo
+    before insert on Agencias
+    for each row
+    begin
+    select seq_Agenciass_AgenciaCodigo.nextval into :new.AgenciaCodigo from dual;
+    end;
+
+GO
+ALTER TABLE Agencias ADD CONSTRAINT FK_GRUPOS_AGENCIAS FOREIGN KEY  (GrupoCodigo) REFERENCES Grupo
+GO
+INSERT into Agencias(AgenciaNome, AgenciaCidade, AgenciaFundos, GrupoCodigo) VALUES  ('Verde Vale','Blumenau', 900000,1)
+GO
+INSERT into Agencias(AgenciaNome, AgenciaCidade, AgenciaFundos, GrupoCodigo) VALUES  ('Cidade das Flores','Joinville', 800000,1)
+GO
+INSERT into Agencias(AgenciaNome, AgenciaCidade, AgenciaFundos, GrupoCodigo) VALUES  ('Universitária', 'Florianópolis', 750000,1)
+GO
+INSERT into Agencias(AgenciaNome, AgenciaCidade, AgenciaFundos, GrupoCodigo) VALUES  ('Joinville', 'Joinville', 950000,1)
+GO
+INSERT into Agencias(AgenciaNome, AgenciaCidade, AgenciaFundos, GrupoCodigo) VALUES  ('Beira Mar', 'Florianópolis', 600000,1)
+GO
+INSERT into Agencias(AgenciaNome, AgenciaCidade, AgenciaFundos, GrupoCodigo) VALUES  ('Criciúma', 'Criciúma', 500000,1)
+GO
+INSERT into Agencias(AgenciaNome, AgenciaCidade, AgenciaFundos, GrupoCodigo) VALUES  ('Blumenau', 'Blumenau', 1100000,1)
+GO
+INSERT into Agencias(AgenciaNome, AgenciaCidade, AgenciaFundos, GrupoCodigo) VALUES  ('Germânia', 'Blumenau', 400000,1)
+GO
+
+CREATE TABLE Contas
+(
+AgenciaCodigo int,
+ContaNumero VARCHAR (10) CONSTRAINT PK_CONTA PRIMARY KEY,
+ClienteCodigo int,
+ContaSaldo MONEY,
+ContaAbertura date
+)
+
+GO
+ALTER TABLE Contas ADD CONSTRAINT FK_CLIENTES_CONTAS FOREIGN KEY  (ClienteCodigo) REFERENCES Clientes
+GO
+ALTER TABLE Contas ADD CONSTRAINT FK_AGENCIA_CONTAS FOREIGN KEY  (AgenciaCodigo) REFERENCES Agencias
+GO
+INSERT into Contas(AgenciaCodigo, ContaNumero, ClienteCodigo, ContaSaldo, ContaAbertura) VALUES  (4,'C-401',1,500,'01012014')
+GO
+INSERT into Contas(AgenciaCodigo, ContaNumero, ClienteCodigo, ContaSaldo, ContaAbertura) VALUES  (4,'C-402',2,200,'27022014')
+GO
+INSERT into Contas(AgenciaCodigo, ContaNumero, ClienteCodigo, ContaSaldo, ContaAbertura) VALUES  (4,'C-403',3,350,'21072013')
+GO
+INSERT into Contas(AgenciaCodigo, ContaNumero, ClienteCodigo, ContaSaldo, ContaAbertura) VALUES  (4,'C-404',7,870,'11082013')
+GO
+INSERT into Contas(AgenciaCodigo, ContaNumero, ClienteCodigo, ContaSaldo, ContaAbertura) VALUES  (1,'C-101',11,800,'03082013')
+GO
+INSERT into Contas(AgenciaCodigo, ContaNumero, ClienteCodigo, ContaSaldo, ContaAbertura) VALUES  (2,'C-201',4,800,'12042013')
+GO
+INSERT into Contas(AgenciaCodigo, ContaNumero, ClienteCodigo, ContaSaldo, ContaAbertura) VALUES  (3,'C-301',5,400,'04072014')
+GO
+INSERT into Contas(AgenciaCodigo, ContaNumero, ClienteCodigo, ContaSaldo, ContaAbertura) VALUES(5,'C-501',6,300,'23032011')
+GO
+INSERT into Contas(AgenciaCodigo, ContaNumero, ClienteCodigo, ContaSaldo, ContaAbertura) VALUES(6,'C-601',8,900,'12102013')
+GO
+INSERT into Contas(AgenciaCodigo, ContaNumero, ClienteCodigo, ContaSaldo, ContaAbertura) VALUES(7,'C-701',9,550,'02092011')
+GO
+INSERT into Contas(AgenciaCodigo, ContaNumero, ClienteCodigo, ContaSaldo, ContaAbertura) VALUES(8,'C-801',10,1000,'01082007')
+GO
+
+CREATE TABLE Emprestimos
+(
+AgenciaCodigo INT,
+ClienteCodigo int,
+EmprestimoCodigo varchar (10),
+EmprestimoTotal MONEY
+)
+
+GO
+ALTER TABLE Emprestimos ADD CONSTRAINT FK_EMPRESTIMOS_CLIENTES FOREIGN KEY  (ClienteCodigo) REFERENCES Clientes
+GO
+ALTER TABLE Emprestimos ADD CONSTRAINT FK_EMPRESTIMOS_AGENGIA FOREIGN KEY  (AgenciaCodigo) REFERENCES Agencias
+GO
+insert into Emprestimos(AgenciaCodigo, ClienteCodigo, EmprestimoCodigo, EmprestimoTotal) values (4,1,'L-10',2000)
+GO
+insert into Emprestimos(AgenciaCodigo, ClienteCodigo, EmprestimoCodigo, EmprestimoTotal) values (2,4,'L-20',1500)
+GO
+insert into Emprestimos(AgenciaCodigo, ClienteCodigo, EmprestimoCodigo, EmprestimoTotal) values (4,2,'L-15',1800)
+GO
+insert into Emprestimos(AgenciaCodigo, ClienteCodigo, EmprestimoCodigo, EmprestimoTotal) values (4,3,'L-30',2500)
+GO
+insert into Emprestimos(AgenciaCodigo, ClienteCodigo, EmprestimoCodigo, EmprestimoTotal) values (6,8,'L-40',3000)
+GO
+insert into Emprestimos(AgenciaCodigo, ClienteCodigo, EmprestimoCodigo, EmprestimoTotal) values (1,11,'L-35',2800)
+GO
+insert into Emprestimos(AgenciaCodigo, ClienteCodigo, EmprestimoCodigo, EmprestimoTotal) values (4,7,'L-50',2300)
+GO
+
+CREATE TABLE Depositantes
+(
+AgenciaCodigo INT,
+ContaNumero varchar(10),
+ClienteCodigo int,
+DepositoValor MONEY,
+DepositoData DATE
+)
+
+GO
+ALTER TABLE Depositantes ADD CONSTRAINT FK_CONTA_AGENGIA FOREIGN KEY  (AgenciaCodigo) REFERENCES Agencias
+GO
+ALTER TABLE Depositantes ADD CONSTRAINT FK_DEPOSITANTES_CONTAS FOREIGN KEY  (ContaNumero) REFERENCES Contas
+GO
+ALTER TABLE Depositantes ADD CONSTRAINT FK_DEPOSITANTES_CLIENTES FOREIGN KEY  (ClienteCodigo) REFERENCES Clientes
+GO
+insert into Depositantes (AgenciaCodigo, ContaNumero, ClienteCodigo, DepositoValor,DepositoData) values (4,'C-401',1,500,'01012014')
+GO
+insert into Depositantes (AgenciaCodigo, ContaNumero, ClienteCodigo, DepositoValor,DepositoData) values (4,'C-402',2,200,'27022014')
+GO
+insert into Depositantes (AgenciaCodigo, ContaNumero, ClienteCodigo, DepositoValor,DepositoData) values (4,'C-403',3,350,'21072013')
+GO
+insert into Depositantes (AgenciaCodigo, ContaNumero, ClienteCodigo, DepositoValor,DepositoData) values (2,'C-201',4,800,'12042014')
+GO
+insert into Depositantes (AgenciaCodigo, ContaNumero, ClienteCodigo, DepositoValor,DepositoData) values (3,'C-301',5,400,'04072014')
+GO
+insert into Depositantes (AgenciaCodigo, ContaNumero, ClienteCodigo, DepositoValor,DepositoData) values (4,'C-404',7,870,'11082013')
+GO
+insert into Depositantes (AgenciaCodigo, ContaNumero, ClienteCodigo, DepositoValor,DepositoData) values (5,'C-501',6,300,'23032011')
+GO
+insert into Depositantes (AgenciaCodigo, ContaNumero, ClienteCodigo, DepositoValor,DepositoData) values (6,'C-601',8,900,'12102013')
+GO
+insert into Depositantes (AgenciaCodigo, ContaNumero, ClienteCodigo, DepositoValor,DepositoData) values (7,'C-701',9,550,'02092011')
+GO
+insert into Depositantes (AgenciaCodigo, ContaNumero, ClienteCodigo, DepositoValor,DepositoData) values (8,'C-801',10,1000,'01082007')
+GO
+insert into Depositantes (AgenciaCodigo, ContaNumero, ClienteCodigo, DepositoValor,DepositoData) values (1,'C-101',11,800,'03082013')
+GO
+
+CREATE TABLE Devedores
+(
+AgenciaCodigo INT,
+ClienteCodigo int,
+EmprestimoCodigo varchar (10),
+DevedorSaldo MONEY
+)
+
+ALTER TABLE Devedores ADD CONSTRAINT FK_DEVEDORES_AGENGIA 
+FOREIGN KEY  (AgenciaCodigo) REFERENCES Agencias
+GO
+ALTER TABLE Devedores ADD CONSTRAINT FK_DEVEDORES_CONTAS 
+FOREIGN KEY  (ClienteCodigo) REFERENCES Clientes
+GO
+insert into Devedores(AgenciaCodigo, ClienteCodigo, EmprestimoCodigo, DevedorSaldo) values (4,1,'L-10',1000)
+GO
+insert into Devedores(AgenciaCodigo, ClienteCodigo, EmprestimoCodigo, DevedorSaldo) values (2,4,'L-20',500)
+GO
+insert into Devedores(AgenciaCodigo, ClienteCodigo, EmprestimoCodigo, DevedorSaldo) values (4,2,'L-15',800)
+GO
+insert into Devedores(AgenciaCodigo, ClienteCodigo, EmprestimoCodigo, DevedorSaldo) values (4,3,'L-30',2000)
+GO
+insert into Devedores(AgenciaCodigo, ClienteCodigo, EmprestimoCodigo, DevedorSaldo) values (6,8,'L-40',2000)
+GO
+insert into Devedores(AgenciaCodigo, ClienteCodigo, EmprestimoCodigo, DevedorSaldo) values (1,11,'L-35',2600)
+GO
+insert into Devedores(AgenciaCodigo, ClienteCodigo, EmprestimoCodigo, DevedorSaldo) values (4,7,'L-50',2300)
+GO
+
+CREATE TABLE CartaoCredito
+(
+AgenciaCodigo INT,
+ClienteCodigo int,
+CartaoCodigo varchar (20),
+CartaoLimite MONEY
+)
+
+ALTER TABLE CartaoCredito ADD CONSTRAINT FK_CARTAOCREDITO_AGENGIA FOREIGN KEY  (AgenciaCodigo) REFERENCES Agencias
+GO
+ALTER TABLE CartaoCredito ADD CONSTRAINT FK_CARTAOCREDITO_CLIENTES FOREIGN KEY  (ClienteCodigo) REFERENCES Clientes
+GO
+--insert simples
+INSERT into dbo.CartaoCredito(AgenciaCodigo, ClienteCodigo, CartaoCodigo, CartaoLimite) VALUES  (1,12,'1111-2222-3333-4444',1000)
+GO
+INSERT into dbo.CartaoCredito(AgenciaCodigo, ClienteCodigo, CartaoCodigo, CartaoLimite) VALUES  (4,13,'1234-4567-8910-1112',1000)
+GO
+INSERT into dbo.CartaoCredito(AgenciaCodigo, ClienteCodigo, CartaoCodigo, CartaoLimite) VALUES  (4,7,'2222-3333-4444-5555',2000)

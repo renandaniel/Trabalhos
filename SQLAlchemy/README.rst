@@ -6,7 +6,17 @@
 Minha Caixa - SQLAlchemy
 ========================
 
+.. figure:: https://travis-ci.org/BDAENGUniville/Trabalhos.svg?branch=sqlalchemy
+  :alt: Status do Teste
+  :target: https://travis-ci.org/BDAENGUniville/Trabalhos
+
 Banco de dados Minha Caixa no ORM `SQLAlchemy <http://www.sqlalchemy.org/>`_.
+
+
+Links
+-----
+
+- `Testes <https://travis-ci.org/BDAENGUniville/Trabalhos>`_
 
 
 Arquivos

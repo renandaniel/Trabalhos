@@ -42,16 +42,11 @@ Guilherme Borges, Rodrigo
 SQL Server
 ~~~~~~~~~~
 
-Renan, Karlos, Felipe Walther, Gabriel Maia, Miguel
+- Renan `@renandaniel <https://github.com/renandaniel>`_
+- Karlos `@karloskep <https://github.com/karloskep>`_
+Felipe Walther, Gabriel Maia, Miguel
 Murilo, Andrei, Guilherme A, Jose Raul, Luis Eduardo
-
-Felipe Prestes `@felipeprestess <https://github.com/felipeprestess>`_
-
-Fabiane
-
-- Jeferson Machado `@jefersonnnn <https://github.com/jefersonnnn>`_
-
-Jean Peter
+Felipe Prestes, Fabiane, Jeferson, Jean Peter
 
 * RH/Pessoal
 * Financeiro/Tesouraria

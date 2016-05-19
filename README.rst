@@ -44,7 +44,9 @@ SQL Server
 
 Renan, Karlos, Felipe Walther, Gabriel Maia, Miguel
 Murilo, Andrei, Guilherme A, Jose Raul, Luis Eduardo
-Felipe Prestes, Fabiane, Jeferson, Jean Peter
+Felipe Prestes, Fabiane, 
+- Jeferson Machado `@jefersonnnn <https://github.com/jefersonnnn>`_
+Jean Peter
 
 * RH/Pessoal
 * Financeiro/Tesouraria
